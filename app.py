@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 
-# Page config
+# Streamlit config
 st.set_page_config(page_title="NeuroGuard Flow & Ethics", layout="wide", initial_sidebar_state="collapsed")
 
 # Dark theme CSS
@@ -21,38 +21,36 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Title
-st.markdown("<h1 style='text-align: center;'>⚙️ NeuroGuard Process Flowchart & Ethics Radar ⚖️</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>⚙️ NeuroGuard Therapeutic Architecture & Ethics Radar</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
-# FLOWCHART
-st.subheader("🔄 Intelligent Therapeutic Flow: Step-by-Step")
-
-st.markdown("""
-<div style='text-align: center; font-size: 16px; margin-bottom: 10px;'>
-<b>Diagnosis</b> ➝ <b>Prediction</b> ➝ <b>Attack</b> ➝ <b>Regeneration</b> ➝ <b>Monitoring</b>
-</div>
-""", unsafe_allow_html=True)
+# FLOWCHART SECTION
+st.subheader("🧬 Adaptive Multimodal Neuro-Oncological Protocol (AMNP): Full-Stack Therapeutic Cascade")
 
 flow_fig = go.Figure()
-steps = ["Diagnosis", "Prediction", "Attack", "Regeneration", "Monitoring"]
+steps = ["Diagnosis (MRI + Organoids)", 
+         "Mutation Prediction (Quantum AI)", 
+         "Multimodal Attack (Nanobots + CRISPR)", 
+         "Neural Regeneration (3D Bioprinting)", 
+         "Real-Time Surveillance (Implants + AI)"]
 x_pos = [0.1, 0.3, 0.5, 0.7, 0.9]
 colors = ['#1f77b4', '#17becf', '#d62728', '#2ca02c', '#ff7f0e']
 
 for i, step in enumerate(steps):
-    flow_fig.add_shape(type="rect", x0=x_pos[i] - 0.08, y0=0.4, x1=x_pos[i] + 0.08, y1=0.6,
+    flow_fig.add_shape(type="rect", x0=x_pos[i]-0.08, y0=0.4, x1=x_pos[i]+0.08, y1=0.6,
                        line=dict(color='white'), fillcolor=colors[i])
     flow_fig.add_annotation(x=x_pos[i], y=0.5, text=f"<b>{step}</b>", showarrow=False,
-                            font=dict(size=16, color='white'))
+                            font=dict(size=13, color='white'))
 
-for i in range(len(steps) - 1):
-    flow_fig.add_annotation(x=x_pos[i] + 0.09, y=0.5, ax=x_pos[i+1] - 0.09, ay=0.5,
+for i in range(len(steps)-1):
+    flow_fig.add_annotation(x=x_pos[i]+0.09, y=0.5, ax=x_pos[i+1]-0.09, ay=0.5,
                             showarrow=True, arrowhead=2, arrowsize=2, arrowwidth=2, arrowcolor="white")
 
 flow_fig.update_layout(
     xaxis=dict(visible=False), yaxis=dict(visible=False),
-    template="plotly_dark", height=300, showlegend=False,
-    plot_bgcolor='#0d1117', paper_bgcolor='#0d1117',
-    margin=dict(l=20, r=20, t=20, b=20)
+    template="plotly_dark", height=330,
+    margin=dict(l=20, r=20, t=30, b=20),
+    plot_bgcolor='#0d1117', paper_bgcolor='#0d1117'
 )
 
 st.plotly_chart(flow_fig, use_container_width=True)
@@ -61,8 +59,8 @@ st.plotly_chart(flow_fig, use_container_width=True)
 st.subheader("⚖️ Comparative Ethical Impact Radar")
 
 variables = ['Risk', 'Autonomy', 'Reversibility', 'Precision', 'Regeneration']
-traditional = [70, 30, 20, 45, 10]  # Higher = worse
-neuroguard = [15, 90, 85, 95, 95]   # Higher = better
+traditional = [70, 30, 20, 45, 10]
+neuroguard = [15, 90, 85, 95, 95]
 
 radar_fig = go.Figure()
 radar_fig.add_trace(go.Scatterpolar(r=traditional, theta=variables, fill='toself',
